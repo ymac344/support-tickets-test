@@ -1,18 +1,18 @@
-# 🎫 Support tickets template
+# 🛒 ניהול הזמנות רכש
 
-A simple Streamlit app showing an internal tool that lets you create, manage, and visualize support tickets. 
+אפליקציית Streamlit לניהול הזמנות רכש: יצירת הזמנות חדשות, עדכון הזמנות קיימות ומעקב אחר היקף הרכש.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://support-tickets-template.streamlit.app/)
+הנתונים באפליקציה הם נתוני דוגמה, והם נשמרים רק למשך הביקור הנוכחי בדפדפן.
 
-### How to run it on your own machine
+### הרצה מקומית
 
-1. Install the requirements
+1. התקנת הדרישות
 
    ```
    $ pip install -r requirements.txt
    ```
 
-2. Run the app
+2. הרצת האפליקציה
 
    ```
    $ streamlit run streamlit_app.py
