@@ -13,6 +13,12 @@ st.markdown(
     """
     <style>
     .stApp { direction: rtl; }
+    .stApp [data-testid="stElementContainer"],
+    .stApp [data-testid="stMarkdownContainer"],
+    .stApp [data-testid="stWidgetLabel"],
+    .stApp [data-testid="stMetric"],
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+    .stApp p, .stApp input, .stApp textarea { text-align: right; }
     .stApp [data-testid="stVegaLiteChart"],
     .stApp [data-testid="stMetricDelta"],
     .stApp [data-testid="stDataFrame"] { direction: ltr; }
@@ -51,6 +57,9 @@ STATUSES = [STATUS_PENDING, STATUS_APPROVED, STATUS_RECEIVED, STATUS_CANCELLED]
 DEPARTMENTS = ["מערכות מידע", "תפעול", "שיווק", "כספים", "משאבי אנוש"]
 MONTHS = ["ינו׳", "פבר׳", "מרץ", "אפר׳", "מאי", "יוני", "יולי", "אוג׳", "ספט׳", "אוק׳", "נוב׳", "דצמ׳"]
 CURRENCY_FORMAT = "₪ %.2f"
+# Tables are drawn left-to-right, so list the columns in reverse to get the first
+# column on the right, as expected in Hebrew.
+TABLE_COLUMN_ORDER = list(reversed(COLUMN_LABELS))
 
 
 def format_currency(amount):
@@ -176,6 +185,7 @@ if submitted:
             df_new,
             width="stretch",
             hide_index=True,
+            column_order=TABLE_COLUMN_ORDER,
             column_config={
                 **COLUMN_LABELS,
                 "Unit Price": st.column_config.NumberColumn(
@@ -229,6 +239,7 @@ st.data_editor(
     on_change=save_order_edits,
     width="stretch",
     hide_index=True,
+    column_order=TABLE_COLUMN_ORDER,
     column_config={
         **COLUMN_LABELS,
         "Supplier": st.column_config.TextColumn(COLUMN_LABELS["Supplier"], required=True),
@@ -312,7 +323,7 @@ monthly_plot = (
         orient="bottom", titleFontSize=14, labelFontSize=14, titlePadding=5
     )
 )
-st.altair_chart(monthly_plot, width="stretch", theme="streamlit")
+st.altair_chart(monthly_plot, theme="streamlit")
 
 st.write("##### היקף הרכש לפי ספק (₪, ללא הזמנות שבוטלו)")
 supplier_plot = (
@@ -327,4 +338,4 @@ supplier_plot = (
         ],
     )
 )
-st.altair_chart(supplier_plot, width="stretch", theme="streamlit")
+st.altair_chart(supplier_plot, theme="streamlit")
